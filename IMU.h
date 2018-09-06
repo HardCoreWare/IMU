@@ -20,24 +20,30 @@ private:
 
 struct Acc{
 
-long value[3];
-long vector;
-long cal;
-double angle[3];
+    long value[3];
+    long vector;
+    long cal;
+    double angle[3];
 
 }acc;
 
 //gyroscope variables
+
 struct Gyro{
-long cal[3];
-double spin[3];
-double angle[3];
+
+    long cal[3];
+    double spin[3];
+    double angle[3];
+    
 }gyro;
 
 //output data for getters
+
 struct Output{	
-double angle[3];
-double radial[3];       // not used yet
+
+    double angle[3];
+    double radial[3];
+
 }output;
 
 long temp;
