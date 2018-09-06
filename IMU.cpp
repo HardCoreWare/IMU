@@ -4,18 +4,18 @@
 #include <WProgram.h>
 #endif
 
-#include "MPU.h"
+#include "IMU.h"
 #include <Wire.h>
 
 
-MPU::MPU(){
+IMU::IMU(){
   
 }
 
 
-void MPU::begin(){
+void IMU::begin(){
 
- //Activate the MPU-6050
+ //Activate the IMU-6050
  Wire.beginTransmission(0x68);                                        
  Wire.write(0x6B);                                                    
  Wire.write(0x00);                                                    
@@ -33,7 +33,7 @@ void MPU::begin(){
 
 }
  
-void MPU::read(){    
+void IMU::read(){    
 
 const int x=0,y=1,z=2;
 const int R=0,P=1,Y=2;
@@ -68,7 +68,7 @@ acc.vector = sqrt((acc.value[x]*acc.value[x])+(acc.value[y]*acc.value[y])+(acc.v
 acc.angle[P] = asin((double)acc.value[P]/acc.vector)*  57.296;                     //Calculate the pitch angle
 acc.angle[R] = asin((double)acc.value[R]/acc.vector)* -57.296;                     //Calculate the roll angle
   
- //Place the MPU-6050 spirit level and note the values in the following two lines for calibration
+ //Place the IMU-6050 spirit level and note the values in the following two lines for calibration
 acc.angle[P] -= 0.0;                                                               //Accelerometer calibration value for pitch
 acc.angle[R] -= 0.0;                                                               //Accelerometer calibration value for roll
 
@@ -93,16 +93,16 @@ loopTimer = millis();
 
 }
 
-void MPU::calibrate(int n){
+void IMU::calibrate(int n){
 
 int x=0,y=1,z=2;
 
 for (int i = 0; i < n ; i ++){                  
 
-Wire.beginTransmission(0x68);                                    //Start communicating with the MPU-6050
+Wire.beginTransmission(0x68);                                    //Start communicating with the IMU-6050
 Wire.write(0x3B);                                                //Send the requested starting register
 Wire.endTransmission();                                          //End the transmission
-Wire.requestFrom(0x68,14);                                       //Request 14 bytes from the MPU-6050
+Wire.requestFrom(0x68,14);                                       //Request 14 bytes from the IMU-6050
 while(Wire.available() < 14);                                    //Wait until all the bytes are received
 acc.value[x] = Wire.read()<<8|Wire.read();                       //Add the low and high byte to the acc_x variable
 acc.value[y] = Wire.read()<<8|Wire.read();                       //Add the low and high byte to the acc_y variable
@@ -134,15 +134,14 @@ loopTimer = millis();
 }
 
 // get the output angle  0: roll 1: pitch
-double MPU::getAngle(int a){
+double IMU::getAngle(int a){
 
 return output.angle[a];
   
 }
 
-
 // get the total aceleration in mG's  (gravity included)
-double MPU::getAcc(){
+double IMU::getAcc(){
 	
 return (double(acc.vector)/double(acc.cal))*1000;
 	
