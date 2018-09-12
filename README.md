@@ -6,8 +6,10 @@
 
 #### n = number of iterations (int)   100 or more is recommended
 
-####void
+void
 
 ### read()
 
 #### read all data
+
+void
