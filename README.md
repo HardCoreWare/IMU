@@ -8,15 +8,22 @@
 
 void
 
+
+
 ### read()
 
 read all data
 
 void
 
+
+
 ### getAngle(int axis)
 
+returns the angle of any axis as a double
+
 axis (int) 
+           
            0 x
 
            1 y
@@ -25,3 +32,6 @@ axis (int)
 
 
 
+### getAcc(  )
+
+returns the total axis vector in mG's (gravity included)
