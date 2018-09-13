@@ -22,8 +22,7 @@ void
 
 returns the angle of any axis as a double
 
-axis (int) 
-           
+axis           
            0 x
 
            1 y
